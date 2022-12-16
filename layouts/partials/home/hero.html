@@ -1,0 +1,19 @@
+{{ $hero := resources.Get "/images/home-hero.jpg"}}
+{{ $hero.Data.HeroImage }}
+
+<div class="hero h-[90vh] bg-fixed bg-center" style="background-image: url({{$hero.RelPermalink}});">
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-center text-neutral-content">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-4xl md:text-8xl lg:text-8xl font-extrabold text-white
+        opacity-0 intersect:opacity-100 transition-opacity duration-1500">
+        {{ .Site.Title }}
+      </h1>
+      <p class="mb-5 text-2xl text-grey-50
+        opacity-0 intersect:opacity-100 transition-opacity
+      duration-500 delay-200">
+      {{ i18n "home.slogan" }} <span class="font-bold tooltip tooltip-bottom hover:-translate-y-1 transition" data-tip="👆 {{ i18n "home.slogantooltip" }}">{{ i18n "home.eumodel" }}</span>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,155 @@
+{{ define "main" }}
+<div class="container mx-auto md:pt-24"> 
+  <article class="prose lg:prose-xl mx-auto">
+
+    <div>
+      {{ if isset .Params "image" }}
+      {{ $image := .Resources.GetMatch .Params.image }}
+      {{ with $image }}
+      {{ $thumb := ($image.Fill " 1200x512 q80 Center").RelPermalink }} 
+      <img src="{{ $thumb }}" class="w-full" />
+      {{ end }}
+      {{ end }}
+    </div>
+
+    <div class="p-4">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}
+    <h3 class="pb-12"> {{ . }} </h3>
+    {{ end }}
+
+    <div class="not-prose flex-col mb-16">
+
+    <div class="flex gap-8 my-8">
+
+      {{ $img := "" }}
+      {{ $url := "/" }}
+      {{ $author := "U.Sport" }}
+      {{ $avatar := resources.Get "/images/eusport-logo.png" }}
+
+      {{ with .Site.GetPage (printf "/authors/%s/index.md" $.Params.author) }}
+        {{ $url = .RelPermalink }}
+        {{ $author = .Params.Name }}
+        {{ $avatar = .Resources.GetMatch .Params.Image }}
+      {{ end }}
+
+      {{ $a := $avatar.Fill "64x64 q90 Top" }}
+      {{ $img = $a.RelPermalink }}
+      <div class="flex gap-5 hover:scale-105 transition">
+        <div>
+          <img
+          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+          src='{{ $img }}' />
+        </div>
+
+        <div class="self-center">
+          <a href="{{ $url }}">{{ $author }}</a>
+        </div>
+      </div>
+
+      {{ $res := .Resources }}
+      {{ with .Params.coauthors }}
+      {{ range . }}
+      <div class="flex gap-5 hover:scale-105 transition">
+        <div>
+          {{ $avatar := $res.GetMatch .icon }}
+          {{ with $avatar }}
+          {{ $a := $avatar.Fill "64x64 q80 Left" }}
+          <img
+          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+          src='{{ $a.RelPermalink }}' />
+          {{ end }}
+        </div>
+        <div class="self-center">
+          <a href="{{ .url }}"> {{ .title }} </a>
+        </div>
+      </div>
+      {{ end }}
+      {{ end }}
+
+      </div>
+
+      {{ with .Param "tags" }}
+      <div class="text-indigo-500 text-md font-light mb-8">
+        <p>
+          {{ range $index, $tag := (. | sort) }} 
+          {{ with $.Site.GetPage (printf "/%s/%s" "tags" $tag) }}
+          <a href="{{ .Permalink }}" class="opacity-70 hover:opacity-100 pr-5">
+            {{ partial "tag" $tag }}
+          </a>
+          {{ end }}
+          {{ end }}
+        </p>
+      </div>
+      {{ end }}
+
+      <div class="text-gray-400 text-sm">
+        <div>
+        {{ .PublishDate | time.Format ":date_long" }}
+        <span>·</span>
+        {{ math.Round (div (.WordCount) 220.0) }} {{ i18n "min.read" }}
+        </div>
+
+        <div>
+        {{ if .IsTranslated }}
+          <div class="pt-4">
+          {{ i18n "translation" }}
+          {{ range .Translations }}
+          <a class="font-bold" href="{{ .RelPermalink }}">
+          &nbsp;{{ i18n "translationother" }}
+          </a>.
+          {{ end }}
+          </div>
+        {{ end }}
+        </div>
+
+      </div>
+
+      {{ $params := .Params }}
+      {{ $res := .Resources }}
+
+      {{ with .Params.download }}
+      <div class="w-full text-center pt-8">
+        {{ if isset $params "image" }}
+        {{ $image := $res.GetMatch $params.image }}
+        {{ with $image }}
+          {{ $thumb := ($image.Fill " 300x400 q80 Center").RelPermalink }} 
+          <a href="{{ . }}" target="_blank"><img src="{{ $thumb }}" class="hover:shadow-xl transition shadow mx-auto m-8" /></a>
+          {{ end }}
+        {{ end }}
+        <a
+          href="{{ . }}"
+          target="_blank"
+          rel="noreferrer noopener"
+          style="color: white"
+          class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          >
+          {{ i18n "open.pdf" }}
+        </a>
+      </div>
+      {{ end }}
+
+    </div> <!-- /not-prose -->
+
+    {{ .Content }}
+
+    <div>
+      {{ $related := .Site.RegularPages.RelatedIndices . "keywords" | first 5 }}
+      {{ with $related }}
+      <h3>{{ i18n "see.also" }}</h3>
+      <ul>
+        {{ range . }}
+        <li><a style="text-decoration: none" href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </div>
+
+    </div>
+  </article>
+
+</div>
+
+{{ partial "social" . }}
+
+{{ end }}

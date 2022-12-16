@@ -1,0 +1,49 @@
+{{ $links := .Site.Params.social }}
+{{ $n := len $links }}
+<div class="flex flex-col items-center justify-center w-full mt-32 mb-24 px-5">
+  <h2 class="text-3xl text-extrabold mb-12 text-gray-500">{{ i18n "follow.us" }}</h2>
+
+  <div class="grid grid-flow-col auto-cols-max gap-7">
+
+    {{ with $links.facebook }}
+    <a href="{{ . }}" target="_blank">
+    <button id="facebook" class="duration-500 transform hover:-translate-y-2">
+      <i class="icon-facebook"></i>
+    </button>
+    </a>
+    {{ end }}
+
+    {{ with $links.instagram }}
+    <a href="{{ . }}" target="_blank">
+      <button id="instagram" class="duration-500 transform hover:-translate-y-2">
+        <i class="icon-instagram"></i>
+      </button>
+    </a>
+    {{ end }}
+
+    {{ with $links.telegram }}
+    <a href="{{ . }}" target="_blank">
+      <button id="telegram" class="duration-500 transform hover:-translate-y-2">
+        <i class="icon-telegram"></i>
+      </button>
+    </a>
+    {{ end }}
+
+    {{ with $links.youtube }}
+    <a href="{{ . }}" target="_blank">
+      <button id="youtube" class="duration-500 transform hover:-translate-y-2">
+        <i class="icon-youtube"></i>
+      </button>
+    </a>
+    {{ end }}
+
+    {{ with $links.twitter }}
+    <a href="{{ . }}" target="_blank">
+      <button id="twitter" class="duration-500 transform hover:-translate-y-2">
+        <i class="icon-twitter"></i>
+      </button>
+    </a>
+    {{ end }}
+
+  </div>
+</div>

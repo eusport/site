@@ -1,0 +1,38 @@
+<section class="home-section">
+
+<!-- https://www.flaticon.com/authors/special-ungravity/gradient/2 -->
+<div class="py-16 bg-white overflow-hidden w-full">
+    <div class="">
+      {{ partial "home/section-title" (dict "Title" (i18n "what-we-do")) }}
+        <div class="mt-24 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:-mx-8">
+            <div class="relative group">
+                <div aria-hidden="true" class="absolute inset-0 rounded-xl bg-white shadow-xl transition duration-300 group-hover:scale-105 lg:group-hover:scale-105"></div>
+                <div class="relative text-center space-y-4 p-6 md:p-8">
+                  <img src='{{ (resources.Get "/images/analytics.png").RelPermalink }}' class="w-24 m-auto" width="512" height="512" alt="analytics">
+                    <h4 class="text-2xl text-gray-800 font-medium transition group-hover:text-yellow-800">Аналітика</h4>
+                    <p class="text-gray-600">{{ i18n "description_analytics" }}</p>
+                </div>
+            </div>
+            <div class="relative group">
+                <div aria-hidden="true" class="absolute inset-0 rounded-xl bg-white shadow-xl transition duration-300 group-hover:scale-105 lg:group-hover:scale-105"></div>
+                <div class="relative text-center space-y-4 p-6 md:p-8">
+                    <img src='{{ (resources.Get "/images/strategy.png").RelPermalink }}' class="w-24 m-auto" width="512" height="512" alt="strategy">
+                    <h4 class="text-2xl text-gray-800 font-medium transition group-hover:text-yellow-800">Розробка стратегій</h4>
+                    <p class="text-gray-600">{{ i18n "description_strategy" }}</p>
+                </div>
+            </div>
+            <div class="relative group">
+                <div aria-hidden="true" class="absolute inset-0 rounded-xl bg-white shadow-xl transition duration-300 group-hover:scale-105 lg:group-hover:scale-105"></div>
+                <div class="relative text-center space-y-4 p-6 md:p-8">
+                    <img src='{{ (resources.Get "/images/communication.png").RelPermalink }}' class="w-24 m-auto" width="512" height="512" alt="communication">
+                    <h4 class="text-2xl text-gray-800 font-medium transition group-hover:text-yellow-800">Комунікація</h4>
+                    <p class="text-gray-600">{{ i18n "description_communication" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+
+
+                                
+</section>

@@ -1,0 +1,65 @@
+{{ $caption := .Get "caption" }}
+{{ $source := .Get "source" }}
+{{ $max := .Get "max" }}
+
+{{ $type := .Get "type" }}
+{{ if eq $type "" }} {{ $type = "bar" }} {{ end }}
+
+{{ $useHeaderRow := .Get "header" }}
+{{ $rows := .Inner | transform.Unmarshal }}
+
+{{ $id := substr (md5 $caption) 0 16 }}
+
+<div class="my-6">
+{{ with $caption }}<h4>{{ . }}</h4>{{ end }}
+<div id="chart{{$id}}"></div>
+{{ with $source }}<small><b>{{ humanize (i18n "source") }}:</b>&nbsp;{{ . }}</small>{{ end }}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+var data = {
+    {{ if $useHeaderRow }}
+      {{ $headerRow := index $rows 0 }}
+      {{ $rows = after 1 $rows }}
+    axisLabels: {
+      {{ with $headerRow }}
+        x: '{{ index . 0 }}',
+        y: '{{ index . 1 }}',
+      {{ end }}
+    },
+    {{ end }}
+    labels: [
+        {{ range $rows }}
+        {{ index . 0 }},
+        {{ end }}
+      ],
+    values: [
+        {{ range $rows }}
+        {{ index . 1 }},
+        {{ end }}
+      ],
+  };
+
+var options = {
+  chart: {
+      type: '{{$type}}'
+  },
+  series: [{
+    name: data.axisLabels.y,
+    data: data.values
+  }],
+  xaxis: {
+      categories: data.labels,
+  },
+  yaxis: {
+      {{ with $max }}
+        max: {{ . }}
+      {{ end }}
+  }
+}
+
+  var chart{{$id | safeJS}} = new ApexCharts(document.querySelector("#chart{{$id}}"), options);
+
+  chart{{$id | safeJS}}.render();
+</script>

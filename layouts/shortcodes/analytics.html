@@ -1,0 +1,7 @@
+{{ $slug := .Get "slug" }}
+
+{{ with .Site.GetPage $slug }}
+<div class="not-prose">
+  {{ partial "analytics-summary.html" . }}
+</div>
+{{ end }}

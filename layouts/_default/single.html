@@ -1,0 +1,33 @@
+{{ define "main" }}
+<main>
+  <div class="container mx-auto"> 
+    <article class="prose lg:prose-xl mx-auto pt-24">
+    {{ partial "breadcrumbs.html" . }}
+
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+      <h3 class="pb-12"> {{ . }} </h3>
+      {{ end }}
+
+      {{ if isset .Params "image" }}
+      {{ $image := .Resources.GetMatch .Params.image }}
+        {{ with $image }}
+        {{ $thumb := ($image.Fill " 1200x512 q80 smart").RelPermalink }} 
+        <img src="{{ $thumb }}" class="w-full" />
+        {{ end }}
+        {{ end }}
+
+      <div class="flex-col mb-16">
+
+        {{.Content}}
+
+      </div>
+
+    </article>
+  </div>
+
+</main>
+
+{{ partial "social" . }}
+
+{{ end }}

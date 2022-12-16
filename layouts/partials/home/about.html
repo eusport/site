@@ -1,0 +1,17 @@
+<section class="home-section">
+
+  <div class="max-w-screen-xl px-4 mx-auto my-20">
+    <img src='{{ (resources.Get "/images/collaboration.png").RelPermalink }}'
+      class="w-96 mx-auto my-12 scale-75 intersect:scale-100 transition duration-800" width="512" height="512" alt="collaboration">
+
+      <div class="mb-12 text-2xl sm:leading-relaxed sm:text-xl md:px-40 lg:px-40 xl:px-40
+        opacity-50 intersect:opacity-100 transition duration-800 ease-in">
+        {{ i18n "about_text1" | safeHTML }}
+      </div>
+      <div class="mb-12 text-2xl sm:leading-relaxed sm:text-xl md:px-40 lg:px-40 xl:px-40
+        opacity-0 intersect:opacity-100 transition duration-800 ease-in">
+        {{ i18n "about_text2" | safeHTML }}
+      </div>
+  </div>
+
+</section>

@@ -1,0 +1,41 @@
+{{ range first 1 (where .Site.RegularPages "Params.home" true) }}
+<div class="bg-gradient-to-bl from-indigo-100 dark:from-black via-white dark:via-blue-900 dark:via-grey-600 to-white dark:to-gray-100 min-h-screen h-full">
+<div class="home-section">
+
+  <div class="scale-90 opacity-50 intersect:scale-100 intersect:opacity-100 transition duration-500 lg:delay-100">
+  {{ partial "home/section-title" (dict "Title" (i18n "new.top")) }}
+  </div>
+
+  <div class="w-5/6  scale-90 opacity-50 intersect:scale-100 intersect:opacity-100 transition duration-500 lg:delay-100">
+    <a href="{{ .RelPermalink }}" rel="noreferrer noopener">
+      <div class="card lg:card-side bg-base-100 shadow-2xl hover:shadow-lg">
+          {{ with .Resources.GetMatch .Params.vertical }}
+        <figure>
+          <img src="{{ .RelPermalink }}" alt="cover">
+        </figure>
+        {{ end }}
+        <div class="card-body lg:w-1/2">
+          <h2 class="card-title text-5xl pb-10">
+            {{ .Title }}
+          </h2>
+          <p>{{ .Summary }}</p>
+          <div class="card-actions justify-end">
+            <button
+              href="{{ .RelPermalink }}"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              >
+              {{ i18n "read.more" }}
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </a>
+  </div>
+
+</div>
+</div>
+
+{{ end }}

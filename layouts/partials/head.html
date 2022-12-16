@@ -1,0 +1,55 @@
+<head>
+  {{ with .Title }}
+  <title>{{ . }} | EU Sport</title>
+  <meta property="og:title" content="{{ . }} | EU Sport">
+  <meta name="twitter:title" content="{{ . }} | EU Sport">
+  {{ else }}
+  <title>EU Sport</title>
+  <meta property="og:title" content="EU Sport">
+  <meta name="twitter:title" content="EU Sport">
+  {{ end }}
+  <meta property="twitter:card" content="summary_large_image" />
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="eusport.org.ua">
+  {{ with .Summary }}
+  <meta name="twitter:description" content="{{ . }}">
+  <meta property="og:description" content="{{ . }}">
+  {{ else }}
+  <meta name="twitter:description" content='{{ i18n "home.slogan" }}'>
+  <meta property="og:description" content='{{ i18n "home.slogan" }}'>
+  {{ end }}
+  {{ $image := .Resources.GetMatch .Params.Image }}
+  {{ with $image }}
+  <meta property="og:image" content="{{ ($image.Fill " 1200x630 q80 Center").RelPermalink }}">
+  <meta name="twitter:image" content="{{ ($image.Fill " 1200x630 q80 Center").RelPermalink }}">
+  {{ end }}
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" href="{{ (resources.Get "/images/favicon.ico").RelPermalink }}" type="icon/png" sizes="32x32" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    data-tag="font" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+
+  <link rel="stylesheet" href="{{ "css/social.css" | absURL }}" />
+  {{ $styles:= resources.Get "/css/style.css" | postCSS }}
+
+  {{ if .Site.IsServer }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
+  {{ else }}
+  {{ $styles:= $styles | minify | fingerprint | resources.PostProcess }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+  {{ end }}
+
+  <script defer src="https://unpkg.com/tailwindcss-intersect@1.x.x/dist/observer.min.js"></script>
+
+</head>

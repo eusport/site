@@ -1,0 +1,67 @@
+<div class="container mx-auto">
+  <div class="navbar bg-base-100">
+
+    <div class="navbar-start">
+      <div class="dropdown md:hidden lg:hidden">
+        <label tabindex="0" class="btn btn-ghost md:hidden lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        </label>
+        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+          {{ $currentPage := . }}
+          {{ range .Site.Menus.main }}
+          <li>
+            <a href="{{ .URL | absLangURL }}" nowrap>
+              <span class="whitespace-nowrap">{{ i18n .Name }}</span>
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+      <a href="{{ .Site.BaseURL }}" class="btn btn-ghost normal-case text-xl">
+        {{ partial "logo" . }}
+      </a>
+
+    </div>
+    <div class="navbar-center hidden md:block lg:block">
+      <ul class="menu menu-horizontal p-0">
+
+        {{ $currentPage := . }}
+        {{ range .Site.Menus.main }}
+        <li>
+          {{ if eq .URL "/join" }}
+
+    <a href="/join" class="text-highlight2
+      font-extrabold text-center
+      ">
+      {{ i18n "join" }}
+    </a>
+          {{ else }}
+          <a href="{{ .URL | absLangURL }}" nowrap>
+            <span class="whitespace-nowrap">{{ i18n .Name }}</span>
+          </a>
+          {{ end }}
+        </li>
+        {{ end }}
+
+      </ul>
+    </div>
+
+    <div class="navbar-end">
+      <div class="home-header-languages m-1">
+        {{ range $.Site.Home.AllTranslations }}
+        <span class="navigation-links-text" style="padding-left: 12px">
+          {{ if ne .Lang $.Site.Language.Lang }}
+          <a href="{{ .Permalink }}"
+            class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group focus:ring-4 focus:outline-none focus:ring-purple-200">
+            <span class="relative px-2.5 py-1 transition-all ease-in duration-75 bg-white rounded-md">
+              {{ .Language.LanguageName }}
+            </span>
+          </a>
+          {{ end }}
+        </span>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,57 @@
+baseURL = 'https://eusport.org.ua'
+title = 'EU Sport in Ukraine'
+mainSections = ['posts']
+defaultContentLanguage = 'uk'
+buildDrafts = true
+
+[permalinks]
+  posts = '/:year/:month/:slugorfilename/'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = 'members'
+    url = '/members'
+    weight = 1
+  [[menu.main]]
+    name = 'posts'
+    url = '/posts'
+    weight = 2
+  [[menu.main]]
+    name = 'contacts'
+    url = '/contacts'
+    weight = 3
+  [[menu.main]]
+    name = 'join'
+    url = '/join'
+    weight = 4
+
+[params.members]
+    url = "https://docs.google.com/spreadsheets/d/15v2LrfMrWJRT6q3n7elGJH8g7_JG7EuDBiftMxJu3bM/export?format=csv&gid=0"
+
+[caches]
+  [caches.getcsv]
+    maxAge = "10s"
+
+[params.contacts]
+    email = "board@eusport.org.ua"
+
+[params.social]
+    facebook = "https://www.facebook.com/profile.php?id=100088607476771"
+    telegram = "https://t.me/eu_sport_coalition"
+
+[languages]
+  [languages.uk]
+    contentDir = 'content/ukrainian'
+    languageName = 'UA'
+    title = 'Коаліція EU Sport'
+    weight = 2
+  [languages.en]
+    title = 'EU Sport coalition'
+    contentDir = 'content/english'
+    languageName = 'EN'
+    weight = 1

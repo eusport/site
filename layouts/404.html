@@ -1,0 +1,15 @@
+{{ define "main"}}
+<section class="flex items-center h-full p-16 text-gray-800 min-h-screen">
+	<div class="container flex flex-col items-center justify-center gap-10">
+    <div class="max-w-md text-center">
+      <h2 class="font-extrabold text-9xl text-gray-400">
+        <span class="sr-only">Error</span>404
+      </h2>
+    </div>
+    <div class="text-2xl font-semibold md:text-3xl">{{ i18n "404.sorry" }}</div>
+    <div>
+      <a rel="noopener noreferrer" href="#" class="px-8 py-3 font-semibold rounded bg-violet-600 text-gray-50">{{ i18n "404.home" }}</a>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,11 @@
+{{ $members := where .Site.RegularPages "Section" "members" }}
+<section class="home-section min-h-[70vh]">
+  <div>
+    {{ partial "home/section-title" (dict "Title" (i18n "team") ) }}
+    <div class="grid grod-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+      {{ range $members }}
+      {{ partial "team-member.html" . }}
+      {{ end }}
+    </div>
+  </div>
+</section>

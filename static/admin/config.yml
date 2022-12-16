@@ -1,0 +1,48 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+# publish_mode: editorial_workflow
+
+media_folder: "static/images" # Media files will be stored in the repo under static/images/uploads
+public_folder: "/images"
+
+commit_messages:
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: '[skip ci] Upload “{{path}}”'
+    deleteMedia: '[skip ci] Delete “{{path}}”'
+
+collections:
+  - name: "posts_en"
+    label: "Posts 🇬🇧" # Used in the UI
+    label_singular: "Post"
+    path: '{{slug}}/index'
+    folder: "content/english/posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{fields.slug}}" # Filename/dir template, e.g., YYYY-MM-title/index.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Cover Image", name: "image", widget: "image", choose_url: true}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Tags", name: "tags", widget: "select", multiple: true, min: 1, max: 3, options: ["EU", "stats", "study", "club-system", "economics", "olympic-games", "governance"]}
+  - name: "posts_ua"
+    label: "Публікації 🇺🇦"
+    label_singular: "Публікація"
+    path: '{{slug}}/index'
+    folder: "content/ukrainian/posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{fields.slug}}" # Filename/dir template, e.g., YYYY-MM-title/index.md
+    summary: "{{title}}"
+    fields: # The fields for each document, usually in front matter
+      - {label: "Заголовок", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Дата публікації", name: "date", widget: "datetime"}
+      - {label: "Картинка", name: "image", widget: "image", choose_url: true}
+      - {label: "Текст", name: "body", widget: "markdown"}
+      - {label: "Теги", name: "tags", widget: "select", multiple: true, min: 1, max: 3, options: ["EU", "stats", "study", "club-system", "economics", "olympic-games", "governance"]}

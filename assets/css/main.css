@@ -1,0 +1,35 @@
+/* assets */ 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r;
+    }
+
+    .home-section {
+        @apply container mx-auto grid place-items-center;
+    }
+
+    .text-highlight1 {
+        @apply text-gradient from-primary via-purple-500 to-blue-500 font-bold;
+    }
+
+    .text-highlight2 {
+        @apply text-gradient to-primary via-purple-500 from-blue-500 font-bold;
+    }
+
+    .shadow-gradient1 {
+        @apply
+        before:absolute
+        before:w-full
+        before:h-full
+        before:-z-10
+        before:bg-gradient-to-r before:from-blue-500 before:via-purple-500 before:to-primary
+        before:left-0
+        before:top-0
+        before:blur
+        before:opacity-50
+    }
+}

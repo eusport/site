@@ -1,0 +1,9 @@
+{{ if eq . "club-system" }}
+✅ <span class="text-green-600">{{ i18n . | humanize }}</span>
+{{ else if eq . "economics" }}
+💰 <span class="text-yellow-600">{{ i18n  . | humanize }}</span>
+{{ else if eq . "stats" }}
+📊 <span class="text-blue-600">{{ i18n . | humanize }}</span>
+{{ else }}
+#{{ . }}
+{{ end }}

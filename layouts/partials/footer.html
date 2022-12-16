@@ -1,0 +1,20 @@
+{{ $links := .Site.Params.social }}
+<footer class="container mx-auto footer justify-content-between p-4 mt-20">
+  <div class="items-center">
+    <div>
+      <a href="/">
+        {{ partial "logo" . }}
+      </a>
+    </div>
+    <div>
+      © 2022 - {{ i18n "home.slogan" }} {{ i18n "home.eumodel" }}
+    </div>
+  </div> 
+  <div class="grid-flow-col gap-4 justify-self-end xs:justify-self-start">
+    {{ with $links.telegram }} <a href="{{ . }}" target="_blank"><i class="icon-telegram-sm"></i></a> {{ end }}
+    {{ with $links.facebook }} <a href="{{ . }}" target="_blank"><i class="icon-facebook-sm"></i></a> {{ end }}
+    {{ with $links.youtube }} <a href="{{ . }}" target="_blank"><i class="icon-youtube-sm"></i></a> {{ end }}
+    {{ with $links.instagram }} <a href="{{ . }}" target="_blank"><i class="icon-instagram-sm"></i></a> {{ end }}
+    {{ with $links.twitter }} <a href="{{ . }}" target="_blank"><i class="icon-twitter-sm"> </a> {{ end }}
+  </div>
+</footer>

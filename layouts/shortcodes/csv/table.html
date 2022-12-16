@@ -1,0 +1,29 @@
+{{ $caption := .Get "caption" }}
+{{ $source := .Get "source" }}
+{{ $useHeaderRow := .Get "header" }}
+{{ $rows := .Inner | transform.Unmarshal }}
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg px-3 py-5">
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  {{ with $caption }}<caption>{{ . }}</caption>{{ end }}
+  {{ if $useHeaderRow }}
+    {{ $headerRow := index $rows 0 }}
+    {{ $rows = after 1 $rows }}
+    <tr> {{ range $headerRow }} <th>{{ . }}</th> {{ end }} </tr>
+  {{ end }}
+  <tbody  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+  {{ range $rows }}
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+      {{ range . }}
+        {{ if (findRE "^\\d+$" .) }}
+          <td class="numeric">{{ . }}</td>
+        {{ else }}
+          <td>{{ . }}</td>
+        {{ end }}
+      {{ end }}
+    </tr>
+  {{ end }}
+  </tbody>
+</table>
+{{ with $source }}<small><b>Source:</b>:&nbsp;{{ . }}</small>{{ end }}
+</div>
