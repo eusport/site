@@ -1,3 +1,22 @@
+  {{ if (strings.Contains .RelPermalink "home") }}
+<!DOCTYPE html>
+<html data-theme="light" lang="{{ .Site.LanguageCode }}" dir="ltr">
+{{ partial "head.html" }}
+<script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<body>
+      {{ partial "header.html" . }}
+      {{ partial "home/hero.html" . }}
+      {{ partial "home/about.html" . }}
+      {{ partial "home/explainer.html" . }}
+      {{ partial "home/memorandum.html" . }}
+      {{ partial "home/members.html" . }}
+      {{ partial "home/join.html" . }}
+      {{ partial "social.html" . }}
+      {{ partial "footer.html" . }}
+</body>
+
+</html>
+  {{ else }}
 <!DOCTYPE html>
 <html>
 {{- partial "head.html" . -}}
@@ -11,3 +30,4 @@
 </body>
 
 </html>
+  {{ end }}
