@@ -17,7 +17,7 @@
           {{ end }}
         </ul>
       </div>
-      <a href="{{ .Site.BaseURL }}" class="btn btn-ghost normal-case text-xl">
+      <a href="{{ .Site.BaseURL | absLangURL }}" class="btn btn-ghost normal-case text-xl">
         {{ partial "logo" . }}
       </a>
 
@@ -29,12 +29,9 @@
         {{ range .Site.Menus.main }}
         <li>
           {{ if eq .URL "/join" }}
-
-    <a href="/join" class="text-highlight2
-      font-extrabold text-center
-      ">
-      {{ i18n "join" }}
-    </a>
+          <a href='{{ absLangURL "/join" }}' class="text-highlight2 font-extrabold text-center">
+            {{ i18n "join" }}
+          </a>
           {{ else }}
           <a href="{{ .URL | absLangURL }}" nowrap>
             <span class="whitespace-nowrap">{{ i18n .Name }}</span>

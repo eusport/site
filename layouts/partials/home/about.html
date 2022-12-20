@@ -6,11 +6,19 @@
 
       <div class="mb-12 text-2xl sm:leading-relaxed sm:text-xl md:px-40 lg:px-40 xl:px-40
         opacity-50 intersect:opacity-100 transition duration-800 ease-in">
-        {{ i18n "about_text1" | safeHTML }}
+        {{ if (eq $.Lang "uk" ) }}
+        Модернізація українського спорту потребує <span class="underline decoration-primary font-bold">зкоординованих дій</span> усіх зацікавлених сторін.
+        {{ else }}
+        Modernization of Ukrainian sport requires systemic work of all interested parties.
+        {{ end }}
       </div>
       <div class="mb-12 text-2xl sm:leading-relaxed sm:text-xl md:px-40 lg:px-40 xl:px-40
         opacity-0 intersect:opacity-100 transition duration-800 ease-in">
-        {{ i18n "about_text2" | safeHTML }}
+        {{ if (eq $.Lang "uk" ) }}
+        Наша задача – <span class="underline decoration-purple-500 font-bold">сформувати та втілити стратегію</span> переходу на Європейську модель спорту разом, врахувавши інтереси всіх стейкголдерів.
+        {{ else }}
+        Our goal is to develop and implement a strategy for the transition to the European model of sport together, taking into account the interests of all stakeholders.
+        {{ end }}
       </div>
   </div>
 

@@ -1697,6 +1697,21 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1;
 }
 
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
 .font-extrabold {
   font-weight: 800;
 }
@@ -1812,6 +1827,31 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-secondary {
   --tw-text-opacity: 1;
   color: rgb(0 51 153 / var(--tw-text-opacity));
+}
+
+.underline {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
+.decoration-primary {
+  -webkit-text-decoration-color: #FFA500;
+          text-decoration-color: #FFA500;
+}
+
+.decoration-red-500 {
+  -webkit-text-decoration-color: #ef4444;
+          text-decoration-color: #ef4444;
+}
+
+.decoration-secondary {
+  -webkit-text-decoration-color: #003399;
+          text-decoration-color: #003399;
+}
+
+.decoration-purple-500 {
+  -webkit-text-decoration-color: #a855f7;
+          text-decoration-color: #a855f7;
 }
 
 .opacity-70 {
