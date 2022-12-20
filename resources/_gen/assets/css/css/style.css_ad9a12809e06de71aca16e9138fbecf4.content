@@ -1247,6 +1247,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   list-style-type: disc;
 }
 
+.list-decimal {
+  list-style-type: decimal;
+}
+
 .auto-cols-max {
   grid-auto-columns: -webkit-max-content;
   grid-auto-columns: max-content;
