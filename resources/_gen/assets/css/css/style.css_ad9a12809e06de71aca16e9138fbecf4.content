@@ -1013,6 +1013,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 3rem;
 }
 
+.mx-20 {
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+.mx-36 {
+  margin-left: 9rem;
+  margin-right: 9rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -1276,6 +1286,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   align-items: flex-start;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -1420,6 +1434,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-teal-500 {
   --tw-border-opacity: 1;
   border-color: rgb(20 184 166 / var(--tw-border-opacity));
+}
+
+.border-t-neutral-500 {
+  --tw-border-opacity: 1;
+  border-top-color: rgb(115 115 115 / var(--tw-border-opacity));
 }
 
 .bg-violet-600 {
@@ -1722,6 +1741,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .font-extrabold {
   font-weight: 800;
 }
@@ -1917,6 +1941,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .shadow-blue-500\/50 {
   --tw-shadow-color: rgb(59 130 246 / 0.5);
   --tw-shadow: var(--tw-shadow-colored);
+}
+
+.outline-primary {
+  outline-color: #FFA500;
 }
 
 .ring-2 {
@@ -2428,6 +2456,22 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: auto;
   }
 
+  .md\:items-end {
+    align-items: flex-end;
+  }
+
+  .md\:items-center {
+    align-items: center;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .md\:justify-center {
+    justify-content: center;
+  }
+
   .md\:p-8 {
     padding: 2rem;
   }
@@ -2715,8 +2759,20 @@ Ensure the default browser behavior of the `hidden` attribute.
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .lg\:items-end {
+    align-items: flex-end;
+  }
+
   .lg\:items-center {
     align-items: center;
+  }
+
+  .lg\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .lg\:justify-center {
+    justify-content: center;
   }
 
   .lg\:object-cover {

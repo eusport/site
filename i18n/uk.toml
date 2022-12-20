@@ -76,3 +76,5 @@
     other = "Долучитися"
 [contacts_send_message]
     other = "Або відправте повідомлення через цю форму"
+[learn_more]
+    other = "Дізнатись більше"
