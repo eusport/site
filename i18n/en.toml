@@ -82,3 +82,7 @@
     other = "Join"
 [learn_more]
     other = "Learn more"
+[topics]
+    other = "Topics"
+[authors]
+    other = "Authors"

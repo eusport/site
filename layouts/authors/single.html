@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="container mx-auto px-5 flex-grow">
+  {{ partial "home/section-title" .Title }}
+
+  <div class="flex flex-col items-center md:flex-row w-full">
+    <div class="w-1/2">
+      <div class="flex flex-col items-center leading-loose">
+        <img class="shadow-lg w-24 h-32 mb-8" src="{{ .Params.image }}" alt="{{ .Title }}'s avatar">
+        <h1 class="text-2xl font-bold mb-5">{{ .Title }}</h1>
+        <div class="text-gray-600 text-center">{{ .Params.description }}</div>
+      </div>
+    </div>
+    <div class="w-1/2">
+      {{ .Content }}
+    </div>
+  </div>
+
+  <!-- show posts by this author -->
+  {{ $author := . }}
+
+  {{ $posts := where .Site.RegularPages "Params.author" $author.Params.url }}
+  {{ if gt (len $posts) 0 }}
+  <div class="mt-24 flex flex-col items-center md:flex-row w-full">
+    <h1 class="w-1/2 text-2xl mb-12">
+      {{ "Posts by this author" }}
+    </h1>
+    <div class="w-full flex flex-wrap xs:gap-20 sm:gap-20 gap-5">
+      {{ range where $posts "Draft" "==" false }}
+      {{ partial "post-summary.html" . }}
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}

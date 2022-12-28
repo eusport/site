@@ -1,6 +1,6 @@
 ---
-name: "Іван Данилюк"
-title: "Експерт"
+title: "Іван Данилюк"
+url: "ivan_danyliuk"
 image: profile.jpg
 facebook: https://www.facebook.com/ivan.daniluk
 weight: 7

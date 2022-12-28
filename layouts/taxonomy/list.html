@@ -1,14 +1,12 @@
 {{ define "main" }}
 <div class="container mx-auto">
-  <div class="home-posts-lists-container">
-    {{ partial "home/section-title" (i18n (lower .Data.Term) ) }}
+  {{ partial "home/section-title" (i18n (lower .Data.Term) ) }}
 
-    <div class="flex flex-wrap xs:gap-20 sm:gap-20 gap-5">
-      {{ range where .Paginator.Pages "Draft" "==" false }}
-      {{ partial "post-summary.html" . }}
-      {{ end }}
-    </div>
-
+  <div class="flex flex-wrap xs:gap-20 sm:gap-20 gap-5">
+    {{ range where .Paginator.Pages "Draft" "==" false }}
+    {{ partial "post-summary.html" . }}
+    {{ end }}
   </div>
+
 </div>
 {{ end }}
