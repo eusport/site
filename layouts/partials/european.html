@@ -1,0 +1,74 @@
+  <h2 class="text-7xl text-center font-extrabold px-12 mx-auto">
+    {{ if (eq $.Lang "uk" ) }}
+    Що таке <span class="text-highlight1">Європейська модель спорту</span>?
+    {{ else }}
+    What is the <span class="text-highlight1">European sport model</span>?
+    {{ end }}
+  </h2>
+  <div class="max-w-screen-xl px-4 my-20">
+      <div class="mb-12 flex flex-wrap justify-center gap-6">
+
+        <!-- card 1 -->
+        <div class="card card-compact shadow-lg w-screen md:w-3/12 lg:w-3/12 px-4 py-6
+          opacity-0 intersect:opacity-100 transition duration-800 ease-in">
+          <figure class="border">
+            <img src='{{ (resources.Get "/images/track.png").RelPermalink }}'
+              class="max-h-60 m-auto hover:scale-105 transition duration-300 ease-in" alt="autonomy">
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              Автономія
+            </h2>
+            <p>
+            Спорт належить суспільству, а не державі.
+            </p>
+            <p>
+            Держава не втручається в управління спортом, проте виступає
+            надійним партнером спортивної спільноти.
+            </p>
+          </div>
+        </div>
+
+        <!-- card 2 -->
+        <div class="card card-compact shadow-lg w-screen md:w-3/12 lg:w-3/12 px-4 py-6
+          opacity-0 intersect:opacity-100 transition duration-800 ease-in delay-50
+          ">
+          <figure class="border">
+            <img src='{{ (resources.Get "/images/mass_sport.png").RelPermalink }}'
+              class="max-h-60 m-auto hover:scale-105 transition duration-300 ease-in" alt="mass_sport">
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              Соціальна функція
+            </h2>
+            <p>
+            Спорт - це перш за все здоров'я та інструмент соціальної інтеграції.
+            </p>
+            <p>
+            Головний критерій розвитку спорту - це масовість і залученість всіх верств населення до спорту.
+            </p>
+          </div>
+        </div>
+
+        <!-- card 3 -->
+        <div class="card card-compact shadow-lg w-screen md:w-3/12 lg:w-3/12 px-4 py-6
+          opacity-0 intersect:opacity-100 transition duration-800 ease-in delay-50
+          ">
+          <figure class="border">
+            <img src='{{ (resources.Get "/images/finance.png").RelPermalink }}'
+              class="max-h-60 m-auto hover:scale-105 transition duration-300 ease-in" alt="finance">
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+             Солідарність
+            </h2>
+            <p>
+            Економічна солідарність та волонтерство є запорукою економіки спорту.
+            </p>
+            <p>
+            Держава є одним з важливих стейкголдерів спорту, але є єдиним і не головним.
+            </p>
+          </div>
+        </div>
+        
+      </div>

@@ -8,12 +8,33 @@
         Ми, що нижче підписалися, дійшли згоди наступного:
         </p>
 
-        <ol class="my-8 list-decimal pl-12">
-          <li>Україна успадкувала комуністичну модель управління спортом, яка не відповідає запиту суспільства на спорт</li>
-          <li>Українське суспільство обрало курс на демократію та ринкову економіку</li>
-          <li>Україна має перейти на Європейську модель спорту</li>
-          <li>Цей перехід є не лише законодавчим, а й ідеологічним, і займе десятиліття</li>
-          <li>Він можливий тільки якщо всі стейкголдери в спорті зкоординують свої зусилля для його втілення</li>
+        <!-- list in tailwind.css with large spacing -->
+        <ol class="my-8 list-none leading-loose">
+
+          <li>
+            <img src='{{ (resources.Get "/images/number-1.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Україна успадкувала комуністичну модель управління спортом від СРСР
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-2.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Українське суспільство обрало Європейський курс на демократію та ринкову економіку
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-3.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Комуністична модель не є дієвою на цьому курсі
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-4.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Україна має відмовитись від комуністичного минулого у спорті
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-5.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Україна має перейти на Європейську модель спорту
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-6.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Цей перехід можливий лише за умови об'єднання зусиль всіх стейкголдерів
+          </li>
         </ol>
 
         {{ else }}
