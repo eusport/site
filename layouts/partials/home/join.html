@@ -10,4 +10,34 @@
     </a>
   </div>
 
+  <div class="text-2xl sm:leading-relaxed sm:text-xl lg:px-40">
+    {{ if (eq $.Lang "uk" ) }}
+    <div class="font-bold">
+      Що ви отримуєте від приєднання до коаліції?
+    </div>
+
+    <ol class="my-8 list-inside list-disc leading-loose">
+      <li>Голос у процесі формування бачення нової політики спорту України</li>
+      <li>Регулярні онлайн-зустрічі та доступ у приватну спільноту</li>
+      <li>Контакти людей та організацій, що прагнуть переходу на Європейську модель спорту</li>
+      <li>Ресурси та скіли інших членів коаліції</li>
+      <li>Майданчик для публікації та поширення ваших напрацювань в напрямку переходу на Європейську модель спорту</li>
+    </ol>
+
+    {{ else }}
+    <div class="font-bold">
+      What do you get from joining the coalition?
+    </div>
+
+    <ol class="my-8 list-inside list-disc leading-loose">
+      <li>Your voice in the process of forming new sport policies</li>
+      <li>Regular online meetings and access to private community platform</li>
+      <li>Contacts with people and organizations that want to implement European model of sport in Ukraine</li>
+      <li>Resources and skills of other coalition members</li>
+      <li>Platform for publishing and sharing your work in the direction of transition to the European model of sport</li>
+    </ol>
+    {{ end }}
+
+  </div>
+
 </section>

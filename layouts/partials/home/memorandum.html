@@ -4,9 +4,9 @@
   <div class="relative max-w-screen-xl px-4 py-16 mx-auto lg:h-3/6 lg:items-center lg:flex">
       <div class="text-2xl sm:leading-relaxed sm:text-xl lg:px-40">
         {{ if eq .Lang  "uk" }}
-        <p>
+        <div class="font-bold">
         Ми, що нижче підписалися, дійшли згоди наступного:
-        </p>
+        </div>
 
         <!-- list in tailwind.css with large spacing -->
         <ol class="my-8 list-none leading-loose">
@@ -38,7 +38,39 @@
         </ol>
 
         {{ else }}
-        Memorandum eng TBD
+        <div class="font-bold">
+        We, the undersigned, agree on the following:
+        </div>
+
+        <!-- list in tailwind.css with large spacing -->
+        <ol class="my-8 list-none leading-loose">
+
+          <li>
+            <img src='{{ (resources.Get "/images/number-1.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Ukraine inherited a legacy of the USSR sport governance model
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-2.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Ukrainian society has chosen the European course of democracy and market economy
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-3.png").RelPermalink }}' width="24px" class="inline mr-2">
+            The Soviet model is not effective on this course
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-4.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Ukraine must abandon its Soviet past in sport
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-5.png").RelPermalink }}' width="24px" class="inline mr-2">
+            Ukraine must move to the European sport model
+          </li>
+          <li>
+            <img src='{{ (resources.Get "/images/number-6.png").RelPermalink }}' width="24px" class="inline mr-2">
+            This transition is possible only if all stakeholders unite their efforts
+          </li>
+        </ol>
+
         {{ end }}
       </div>
   </div>

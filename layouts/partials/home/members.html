@@ -2,11 +2,11 @@
 
   {{ $csv := getCSV "," .Site.Params.members.url }}
 
-  {{ $count := 0 }}
+  {{ $persons := 0 }}
   {{ range $i, $r := $csv }}
     {{ if gt $i 0 }}
       {{ $members := int (index $r 6) }}
-      {{ $count = add $count $members }}
+      {{ $persons = add $persons $members }}
     {{ end }}
   {{ end }}
 
@@ -14,8 +14,9 @@
   {{ partial "home/stats.html" . }}
   <div class="text-xl pt-24 pb-8 font-bold">
     {{ if eq .Lang  "uk" }}
-    Станом на {{ dateFormat "02 January 2006" now }} до коаліції приєдналися {{ sub (len $csv) 1 }} організацій та {{ $count }} осіб:
+    Станом на {{ dateFormat "02 January 2006" now }} до коаліції приєдналися {{ sub (len $csv) 1 }} організацій та {{ $persons }} осіб:
     {{ else }}
+    As of {{ dateFormat "January 02, 2006" now }}, {{ sub (len $csv) 1 }} organizations {{ if gt $persons 0 }} and {{ $persons }} individuals{{ end }} have joined the coalition:
     {{ end }}
   </div>
 

@@ -86,3 +86,7 @@
     other = "Topics"
 [authors]
     other = "Authors"
+[stats_organizations]
+    other = "Organizations"
+[stats_persons]
+    other = "Persons"
