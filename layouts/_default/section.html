@@ -2,34 +2,19 @@
 <div class="container mx-auto px-5">
   {{ partial "home/section-title" (i18n (lower .Title)) }}
 
-  <div class="flex flex-wrap xs:gap-20 sm:gap-20 gap-5">
-    <div class="flex flex-wrap xs:gap-20 sm:gap-20 gap-5">
+  <div class="col-span-1 md:hidden lg:hidden flex-col justify-start">
+      {{ partial "sectiontags.html" . }}
+  </div>
+
+  <div class="grid grid-cols-4 gap-5">
+    <div class="col-span-3 flex flex-wrap gap-2">
       {{ range where .Paginator.Pages "Draft" "==" false }}
       {{ partial "post-summary.html" . }}
       {{ end }}
     </div>
 
-    <div class="flex flex-col justify-start">
-      <h2 class="text-4xl font-bold text-highlight1 mb-5">{{ i18n "topics" }}</h2>
-      <div class="flex flex-col">
-        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-        <div class="btn btn-outline btn-success btn-sm justify-start m-1">
-          {{ partial "tag" $name }}
-        </div>
-        {{ end }}
-      </div>
-
-      <h2 class="text-4xl font-bold text-highlight1 my-5">{{ i18n "authors" }}</h2>
-      <div class="flex flex-col">
-        {{ $pages := where .Site.RegularPages "Section" "authors" }}
-        {{ range $pages}}
-        <a
-          class="btn btn-outline btn-primary btn-sm justify-start m-1"
-          href="{{ .RelPermalink }}" rel="noreferrer noopener" class="divide-y">
-          {{ .Title }}
-        </a>
-        {{ end }}
-      </div>
+    <div class="hidden col-span-1 md:flex lg:flex flex-col justify-start">
+      {{ partial "sectiontags.html" . }}
     </div>
   </div>
 
