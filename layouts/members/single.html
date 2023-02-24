@@ -6,8 +6,10 @@
   {{ $count := 0 }}
   {{ range $i, $r := $csv }}
     {{ if gt $i 0 }}
-      {{ $members := int (index $r 6) }}
-      {{ $count = add $count $members }}
+      {{ if (index $r 6) }}
+        {{ $members := int (index $r 6) }}
+        {{ $count = add $count $members }}
+      {{ end }}
     {{ end }}
   {{ end }}
 
@@ -38,7 +40,7 @@
             </a>
           </td>
           <td class="hidden md:block lg:block">
-            <a class="link link-primary" href="{{ index $r 2 }}}}" target="_blank">{{ index $r 2 }}</a>
+            <a class="link link-primary" href="{{ index $r 2 }}" target="_blank">{{ index $r 2 }}</a>
           </td>
         </tr>
         {{ end }}

@@ -2,8 +2,10 @@
 {{ $persons := 0 }}
 {{ range $i, $r := $csv }}
   {{ if gt $i 0 }}
-    {{ $members := int (index $r 6) }}
-    {{ $persons = add $persons $members }}
+    {{ if (index $r 6) }}
+      {{ $members := int (index $r 6) }}
+      {{ $persons = add $persons $members }}
+    {{ end }}
   {{ end }}
 {{ end }}
 <div class="md:my-12 flex p-2 relative m-2

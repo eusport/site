@@ -5,8 +5,10 @@
   {{ $persons := 0 }}
   {{ range $i, $r := $csv }}
     {{ if gt $i 0 }}
-      {{ $members := int (index $r 6) }}
-      {{ $persons = add $persons $members }}
+      {{ if (index $r 6) }}
+        {{ $members := int (index $r 6) }}
+        {{ $persons = add $persons $members }}
+      {{ end }}
     {{ end }}
   {{ end }}
 
@@ -14,7 +16,7 @@
   {{ partial "home/stats.html" . }}
   <div class="text-xl pt-24 pb-8 font-bold">
     {{ if eq .Lang  "uk" }}
-    Станом на {{ dateFormat "02 January 2006" now }} до коаліції приєдналися {{ sub (len $csv) 1 }} організацій та {{ $persons }} осіб:
+    Станом на {{ dateFormat "02 January 2006" now }} до коаліції приєдналися {{ sub (len $csv) 1 }} організацій{{ if gt $persons 0 }}  та {{ $persons }} осіб{{ end }}:
     {{ else }}
     As of {{ dateFormat "January 02, 2006" now }}, {{ sub (len $csv) 1 }} organizations {{ if gt $persons 0 }} and {{ $persons }} individuals{{ end }} have joined the coalition:
     {{ end }}
@@ -30,12 +32,9 @@
         <tr>
           <td>{{ $i }}</td>
           <td>
-            <a class="link link-hover" href="{{ index $r 2 }}}}" target="_blank">
+            <a class="link link-hover" href="{{ index $r 2 }}" target="_blank">
               <strong>{{ index $r 0 }}</strong>
             </a>
-          </td>
-          <td class="hidden md:block lg:block">
-            <a class="link link-primary" href="{{ index $r 2 }}}}" target="_blank">{{ index $r 2 }}</a>
           </td>
         </tr>
         {{ end }}

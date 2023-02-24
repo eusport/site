@@ -6,7 +6,7 @@ home: true
 image: cover.png
 vertical: cover.png
 author: ivan_danyliuk
-summary: summary
+summary: Що таке коаліція? Для чого створюють коаліції? Які перші кроки коаліції?
 tags:
  - eusport101
 ---
