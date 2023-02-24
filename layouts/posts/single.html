@@ -20,55 +20,6 @@
 
     <div class="not-prose flex-col mb-16">
 
-    <div class="flex gap-8 my-8">
-
-      {{ $img := "" }}
-      {{ $url := "/" }}
-      {{ $author := "EUSport" }}
-      {{ $avatar := resources.Get "/images/eusport-logo.png" }}
-
-      {{ with .Site.GetPage (printf "/authors/%s/index.md" $.Params.author) }}
-        {{ $url = .RelPermalink }}
-        {{ $author = .Params.Name }}
-        {{ $avatar = .Resources.GetMatch .Params.Image }}
-      {{ end }}
-
-      {{ $a := $avatar.Fill "64x64 q90 Top" }}
-      {{ $img = $a.RelPermalink }}
-      <div class="flex gap-5 hover:scale-105 transition">
-        <div>
-          <img
-          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-          src='{{ $img }}' />
-        </div>
-
-        <div class="self-center">
-          <a href="{{ $url }}">{{ $author }}</a>
-        </div>
-      </div>
-
-      {{ $res := .Resources }}
-      {{ with .Params.coauthors }}
-      {{ range . }}
-      <div class="flex gap-5 hover:scale-105 transition">
-        <div>
-          {{ $avatar := $res.GetMatch .icon }}
-          {{ with $avatar }}
-          {{ $a := $avatar.Fill "64x64 q80 Left" }}
-          <img
-          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-          src='{{ $a.RelPermalink }}' />
-          {{ end }}
-        </div>
-        <div class="self-center">
-          <a href="{{ .url }}"> {{ .title }} </a>
-        </div>
-      </div>
-      {{ end }}
-      {{ end }}
-
-      </div>
-
       {{ with .Param "tags" }}
       <div class="text-indigo-500 text-md font-light mb-8">
         <p>
@@ -132,6 +83,55 @@
     </div> <!-- /not-prose -->
 
     {{ .Content }}
+
+    <div class="not-prose flex gap-8 mt-12">
+
+      {{ $img := "" }}
+      {{ $url := "/" }}
+      {{ $author := "EUSport" }}
+      {{ $avatar := resources.Get "/images/eusport-logo.png" }}
+
+      {{ with .Site.GetPage (printf "/authors/%s/index.md" $.Params.author) }}
+        {{ $url = .RelPermalink }}
+        {{ $author = .Params.Name }}
+        {{ $avatar = .Resources.GetMatch .Params.Image }}
+      {{ end }}
+
+      {{ $a := $avatar.Fill "64x64 q90 Top" }}
+      {{ $img = $a.RelPermalink }}
+      <div class="flex gap-5 hover:scale-105 transition">
+        <div>
+          <img
+          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+          src='{{ $img }}' />
+        </div>
+
+        <div class="self-center">
+          <a href="{{ $url }}">{{ $author }}</a>
+        </div>
+      </div>
+
+      {{ $res := .Resources }}
+      {{ with .Params.coauthors }}
+      {{ range . }}
+      <div class="flex gap-5 hover:scale-105 transition">
+        <div>
+          {{ $avatar := $res.GetMatch .icon }}
+          {{ with $avatar }}
+          {{ $a := $avatar.Fill "64x64 q80 Left" }}
+          <img
+          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+          src='{{ $a.RelPermalink }}' />
+          {{ end }}
+        </div>
+        <div class="self-center">
+          <a href="{{ .url }}"> {{ .title }} </a>
+        </div>
+      </div>
+      {{ end }}
+      {{ end }}
+
+      </div>
 
     <div>
       {{ $related := .Site.RegularPages.RelatedIndices . "keywords" | first 5 }}
