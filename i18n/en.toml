@@ -76,6 +76,8 @@
     other = "Follow us for more"
 [source]
     other = "Source"
+[plan]
+    other = "Action plan"
 [members]
     other = "Members"
 [how_to_join]

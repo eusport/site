@@ -14,21 +14,25 @@ buildDrafts = true
 
 [menu]
   [[menu.main]]
+    name = 'plan'
+    url = '/plan'
+    weight = 1
+  [[menu.main]]
     name = 'members'
     url = '/members'
-    weight = 1
+    weight = 2
   [[menu.main]]
     name = 'posts'
     url = '/posts'
-    weight = 2
+    weight = 3
   [[menu.main]]
     name = 'contacts'
     url = '/contacts'
-    weight = 3
+    weight = 4
   [[menu.main]]
     name = 'join'
     url = '/join'
-    weight = 4
+    weight = 5
 
 [params.members]
     url = "https://docs.google.com/spreadsheets/d/15v2LrfMrWJRT6q3n7elGJH8g7_JG7EuDBiftMxJu3bM/export?format=csv&gid=0"

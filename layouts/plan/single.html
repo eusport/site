@@ -1,0 +1,120 @@
+{{ define "main" }}
+
+<div class="container mx-auto flex-grow">
+    {{ partial "home/section-title" (i18n "plan") }}
+
+  <ol class="border-l-2 border-primary dark:border-primary-500">
+  <li>
+    <div class="flex-start flex items-center">
+      <div
+        class="-ml-[9px] mr-3 -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary dark:bg-primary-500"></div>
+      <h4 class="-mt-2 text-xl font-semibold">
+        Анонс коаліції
+      </h4>
+    </div>
+    <div class="ml-6 mb-6 pb-6">
+      <a
+        href="#!"
+        class=" text-primary transition font-bold duration-150 ease-in-out hover:text-primary-900 focus:text-primary-900 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-900"
+        >24 лютого, 2023</a
+      >
+      <p class="mt-2 mb-4 text-neutral-600 dark:text-neutral-300">
+      Анонс коаліції та пошук партнерів. Розсилка запрошення усім зацікавленим стейкголдерам.
+      <br />
+      Визначення дати, формату та плану першої зустрічі коаліції.
+      </p>
+    </div>
+  </li>
+  <li>
+    <div class="flex-start flex items-center">
+      <div
+        class="-ml-[9px] mr-3 -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary dark:bg-primary-500"></div>
+      <h4 class="-mt-2 text-xl font-semibold">
+        Перша зустріч коаліції
+      </h4>
+    </div>
+    <div class="ml-6 mb-6 pb-6">
+      <a
+        href="#!"
+        class="text-primary transition font-bold duration-150 ease-in-out hover:text-primary-900 focus:text-primary-900 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-900"
+        >кінець березня, 2023</a> <span class="font-normal text-neutral-400">(буде анонсовано)</span>
+      <p class="mt-2 mb-4 text-neutral-600 dark:text-neutral-200">
+      Перша зустріч коаліції. Знайомство, затвердження бачення та місії коаліції, презентація поточних напрацювань партнерів.
+      Визначення формату та плану наступних зустрічей та роботи коаліції. Пошук ресурсів та фасилітаторів для ефективної роботи коаліції.
+      </p>
+    </div>
+  </li>
+  <li>
+    <div class="flex-start flex items-center">
+      <div
+        class="-ml-[9px] mr-3 -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary dark:bg-primary-500"></div>
+      <h4 class="-mt-2 text-xl font-semibold">
+        Друга зустріч коаліції. Затвердження структури та робочих груп.
+      </h4>
+    </div>
+    <div class="ml-6 mb-6 pb-6">
+      <a
+        href="#!"
+        class=" text-primary transition font-bold duration-150 ease-in-out hover:text-primary-900 focus:text-primary-900 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-900"
+        >квітень, 2023</a
+      >
+      <p class="mt-2 mb-4 text-neutral-600 dark:text-neutral-200">
+      На цьому етапі коаліція буде затверджена, будуть ідентифіковані лідери, визначена структура та робочі групи. Затверджені правила прийняття рішень та вирішення конфліктних та спірних питань.
+      В залежності від результатів першої зустрічі, може бути сформульована стратегія роботи коаліції або лише розпочато підготовку до формування стратегії.
+      </p>
+        <!--
+      <button
+        type="button"
+        class="inline-block rounded bg-primary px-4 pt-[6px] pb-[5px] text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-900 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-900 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+        data-te-ripple-init
+        data-te-ripple-color="light">
+        Read more
+      </button>
+        -->
+    </div>
+  </li>
+  </ol>
+  <ol class="border-l-2 border-neutral dark:border-neutral-500">
+  <li>
+    <div class="flex-start flex items-center">
+      <div
+        class="-ml-[9px] mr-3 -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-neutral-400 dark:bg-neutral-400"></div>
+      <h4 class="-mt-2 text-xl font-semibold">
+        Регулярні зустрічі, презентації та обговорення результатів роботи робочих груп, залучення нових членів.
+      </h4>
+    </div>
+    <div class="ml-6 mb-6 pb-6">
+      <a
+        href="#!"
+        class=" text-neutral transition font-bold duration-150 ease-in-out hover:text-neutral-400 focus:text-neutral-900 active:text-neutral-400 dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-400 dark:active:text-neutral-900"
+        >другий-четвертий квартал 2023</a
+      >
+      <p class="mt-2 mb-4 text-neutral-600 dark:text-neutral-200">
+      Згідно плану затвердженому на першій та другій зустрічі.
+      </p>
+    </div>
+  </li>
+  <li>
+    <div class="flex-start flex items-center">
+      <div
+        class="-ml-[9px] mr-3 -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-neutral-400 dark:bg-neutral-400"></div>
+      <h4 class="-mt-2 text-xl font-semibold">
+        Презентація результатів роботи коаліції за 2023 рік.
+      </h4>
+    </div>
+    <div class="ml-6 mb-6 pb-6">
+      <a
+        href="#!"
+        class=" text-neutral transition font-bold duration-150 ease-in-out hover:text-neutral-400 focus:text-neutral-900 active:text-neutral-400 dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-400 dark:active:text-neutral-900"
+        >грудень 2023</a
+      >
+      <p class="mt-2 mb-4 text-neutral-600 dark:text-neutral-200">
+      Публічна презентація роботи та результатів діяльності коаліції за рік. Ретроспектива роботи коаліції та аналіз проблем. План роботи на 2024 рік.
+      </p>
+    </div>
+  </li>
+</ol>
+
+</div>
+
+{{ end }}

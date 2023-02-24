@@ -1,0 +1,45 @@
+{{ define "main" }}
+<div class="container mx-auto px-5">
+  {{ partial "home/section-title" (i18n (lower .Title)) }}
+
+  <div class="text-center my-12 py-4 lg:px-4">
+    <div class="p-2 bg-gray-400 items-start text-white leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+      <span class="flex text-white uppercase px-2 py-1 text-3xl font-bold">
+        👉
+      </span>
+      <span class=" mr-2 text-left flex-auto leading-1">
+        {{ if (eq $.Lang "uk" ) }}
+          У цьому розділи партнери коаліції можуть розміщувати свої статті, відео, дослідження, напрацювання та освітні матеріали.
+          <br />
+          <br />
+          Процес розміщення публікацій партнерів будо визначенно після першої зустрічі коаліції.<br/>
+          Якщо ви хочете додати нову публікацію вже, напишіть на <a href="mailto:board@eusport.org.ua" class="link">board at eusport.org.ua</a>.
+        {{ else }}
+          In this section, partners of the coalition can place their articles, videos, research, drafts and educational materials.
+          <br />
+          <br />
+          The process of publishing partner publications will be determined after the first meeting of the coalition.<br/>
+          If you want to add a new publication already, write to <a href="mailto:board@eusport.org.ua" class="link">board at eusport.org.ua</a>.
+        {{ end }}
+      </span>
+    </div>
+  </div>
+
+  <div class="col-span-1 md:hidden lg:hidden flex-col justify-start">
+      {{ partial "sectiontags.html" . }}
+  </div>
+
+  <div class="grid grid-cols-4 gap-5">
+    <div class="col-span-3 flex flex-wrap gap-2">
+      {{ range where .Paginator.Pages "Draft" "==" false }}
+      {{ partial "post-summary.html" . }}
+      {{ end }}
+    </div>
+
+    <div class="hidden col-span-1 md:flex lg:flex flex-col justify-start">
+      {{ partial "sectiontags.html" . }}
+    </div>
+  </div>
+
+</div>
+{{ end }}
