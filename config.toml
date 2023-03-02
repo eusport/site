@@ -39,7 +39,7 @@ buildDrafts = true
 
 [caches]
   [caches.getcsv]
-    maxAge = "10s"
+    maxAge = "1h"
 
 [params.contacts]
     email = "board@eusport.org.ua"
