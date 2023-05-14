@@ -3,7 +3,7 @@ title: "Як радянська система ДЮСШ знищує украї�
 date: 2023-05-13T21:08:21+03:00
 slug: "dussh"
 home: true
-draft: false
+draft: true
 image: cover.png
 #vertical: vertical.png
 author: ivan_danyliuk
