@@ -1,10 +1,13 @@
 {{ $csv := getCSV "," .Site.Params.members.url }}
+  {{ $orgs := 0 }}
 {{ $persons := 0 }}
 {{ range $i, $r := $csv }}
   {{ if gt $i 0 }}
     {{ if (index $r 6) }}
       {{ $members := int (index $r 6) }}
       {{ $persons = add $persons $members }}
+      {{ else }}
+        {{ $orgs = add $orgs 1 }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -21,7 +24,7 @@
       </svg>
     </div>
     <div class="stat-title">{{ i18n "stats_organizations" }}</div>
-    <div class="stat-value">{{ sub (len $csv) 1 }}</div>
+    <div class="stat-value">{{ $orgs }}</div>
   </div>
 
   {{ if gt $persons 0 }}
