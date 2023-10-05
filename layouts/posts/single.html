@@ -89,11 +89,11 @@
       {{ $img := "" }}
       {{ $url := "/" }}
       {{ $author := "EUSport" }}
-      {{ $avatar := resources.Get "/images/eusport-logo.png" }}
+      {{ $avatar := resources.Get "/images/home-hero.jpg" }}
 
       {{ with .Site.GetPage (printf "/authors/%s/index.md" $.Params.author) }}
         {{ $url = .RelPermalink }}
-        {{ $author = .Params.Name }}
+        {{ $author = .Params.name }}
         {{ $avatar = .Resources.GetMatch .Params.Image }}
       {{ end }}
 
