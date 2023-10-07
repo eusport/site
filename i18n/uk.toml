@@ -78,6 +78,8 @@
     other = "Як долучитися"
 [join]
     other = "Долучитися"
+[join_coalition]
+    other = "Долучайтеся до коаліції"
 [contacts_send_message]
     other = "Або відправте повідомлення через цю форму"
 [learn_more]
