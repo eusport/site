@@ -1,0 +1,39 @@
+{{ define "main" }}
+  <style> body { margin: 0; } </style>
+
+  <script src="//unpkg.com/3d-force-graph"></script>
+  <script src="//unpkg.com/three"></script>
+  <script src="//unpkg.com/three-spritetext"></script>
+  <script src="//unpkg.com/d3"></script>
+  <script src="//unpkg.com/dat.gui"></script>
+
+  <div id="3d-graph"></div>
+  <!-- <div id="gui" style="position: absolute; top: 10px; right: 10px; z-index: 9999;"></div> -->
+
+  <!-- absolute overlay div in the top right corner -->
+  <div id="description" style="position: absolute; top: 60px; left: 10px;z-index: 9999; background-color: rgba(0,0,0,0.1); padding: 10px; border-radius: 16px;">
+    <div id="title" style="color: #fff; font-family: sans-serif; font-size: 24; font-weight: bold;"></div>
+    <div id="causes" style="color: #fff; font-family: sans-serif; font-size: 20; margin-top: 15px; font-weight: 100"></div>
+    <div id="effects" style="color: #fff; font-family: sans-serif; font-size: 20; margin-top: 15px; font-weight: 100"></div>
+  </div>
+
+<script type="importmap">{ "imports": { "three": "//unpkg.com/three/build/three.module.js" }}</script>
+<script type="module" src="graph.js"></script>
+<script type="module">
+    import { highlightAndCenter } from './graph.js';
+    window.highlightAndCenter = highlightAndCenter;
+    console.log("hello");
+</script>
+<style>
+.link {
+    color: white; /* Default link color */
+    text-decoration: none; /* Removes underline from links */
+    transition: color 0.2s ease; /* Smooth transition for color change */
+}
+
+.link:hover {
+    color: #bbbbff; /* Color of link when hovered */
+    text-decoration: underline; /* Adds underline on hover */
+}
+</style>
+{{ end }}
