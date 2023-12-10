@@ -1,5 +1,4 @@
 {{ define "main" }}
-  <style> body { margin: 0; } </style>
 
   <script src="//unpkg.com/3d-force-graph"></script>
   <script src="//unpkg.com/three"></script>
@@ -8,23 +7,156 @@
   <script src="//unpkg.com/dat.gui"></script>
 
   <div id="3d-graph"></div>
-  <!-- <div id="gui" style="position: absolute; top: 10px; right: 10px; z-index: 9999;"></div> -->
 
   <!-- absolute overlay div in the top right corner -->
-  <div id="description" style="position: absolute; top: 60px; left: 10px;z-index: 9999; background-color: rgba(0,0,0,0.1); padding: 10px; border-radius: 16px;">
-    <div id="title" style="color: #fff; font-family: sans-serif; font-size: 24; font-weight: bold;"></div>
-    <div id="causes" style="color: #fff; font-family: sans-serif; font-size: 20; margin-top: 15px; font-weight: 100"></div>
-    <div id="effects" style="color: #fff; font-family: sans-serif; font-size: 20; margin-top: 15px; font-weight: 100"></div>
+  <div id="description" style="width: 40%; position: absolute; top: 65px; left: 10px; z-index: 9999; background-color: rgba(0,0,3,0.3); padding: 10px; border-radius: 16px;">
+    <div id="title" style="color: #fff; font-family: sans-serif; font-size: 24px; font-weight: bold; display: flex; justify-content: space-between;">
+    </div>
+    <div id="content" style="overflow: hidden; transition: max-height 0.5s ease-out;">
+      <div id="causes" style="color: #fff; font-family: sans-serif; font-size: 20px; margin-top: 15px; font-weight: 100"></div>
+      <div id="effects" style="color: #fff; font-family: sans-serif; font-size: 20px; margin-top: 15px; font-weight: 100"></div>
+      <div id="node-description" style="color: #fff; font-family: sans-serif; font-size: 20px; margin-top: 15px; font-weight: 100"></div>
+    </div>
   </div>
+
+  <!-- absolute overlay div in the bottom right corner -->
+  <div id="groups" style="width: auto; text-align: right; position: absolute; bottom: 10px; right: 10px; z-index: 9999; color: white; background-color: rgba(0,0,3,0.3); padding: 10px; border-radius: 16px;">
+  </div>
+
+  <!-- absolute overlay div in the top right corner -->
+  <div id="hotkey-info" style="width: auto; text-align: right; position: absolute; top: 65px; right: 10px; z-index: 9999; color: #bbbbff; background-color: rgba(0,0,3,0.3); padding: 10px; border-radius: 16px;">
+    <div id="toggleButton" style="color: #bbbbff; font-family: sans-serif; font-size: 12px; font-weight: bold; display: flex; justify-content: space-between;">
+      <div>Клавіши</div>
+      <div onclick='toggleHotkeyInfo()'>▼</div>
+    </div>
+    <div id="hotkeys-content" style="overflow: hidden; max-height: 0px; transition: max-height 0.5s ease-out;">
+      <div id="causes" style="color: #bbbbff; font-family: sans-serif; font-size: 12px; margin-top: 15px; font-weight: 100">
+        <div>Cmd+K/Ctrl+K: Пошук...</div>
+        <div>Ctrl+Click: Виокремити проблему</div>
+        <div>Shift+Click: Центрувати проблему</div>
+        <div>1: Розмір по впливу</div>
+        <div>2: Розмір по наслідкам</div>
+        <div>Tab: Підсвітити категорії</div>
+        <div>+/-: Змінити розмір</div>
+      </div>
+    </div>
+  </div>
+
+<!-- absolute overlay div with search link in the top centercorner -->
+<div id="search" style="width: auto; text-align: center; position: absolute; top: 65px; left: 50%; z-index: 9999; color: #bbbbff; background-color: rgba(0,0,3,0.3); padding: 10px; border-radius: 16px;">
+  <div id="search-link" onclick="showPalette()" style="cursor: pointer; color: #bbbbff; font-family: sans-serif; font-size: 12px; font-weight: bold; display: flex; justify-content: space-between;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M6.66667 0C2.98667 0 0 2.98667 0 6.66667C0 10.3467 2.98667 13.3333 6.66667 13.3333C8.08 13.3333 9.38667 12.7867 10.4133 11.8467L14.6667 16L16 14.6667L11.8467 10.4133C12.7867 9.38667 13.3333 8.08 13.3333 6.66667C13.3333 2.98667 10.3467 0 6.66667 0ZM6.66667 11.3333C4.16 11.3333 2.13333 9.30667 2.13333 6.8C2.13333 4.29333 4.16 2.26667 6.66667 2.26667C9.17333 2.26667 11.2 4.29333 11.2 6.8C11.2 9.30667 9.17333 11.3333 6.66667 11.3333Z" fill="#bbbbff"/>
+    </svg>
+    <div style="padding-left: 10px">Пошук
+      <!-- show text "Cmd-K" on Mac, "Ctrl-K" elsewhere -->
+      <div style="font-weight: 200; color: #bbbbff; display: inline-block; margin-left: 2px; padding: 2px 5px; border-radius: 5px; background-color: rgba(0,0,3,0.3);">
+        (
+        <span id="cmdKey" style="display: none;">Cmd</span>
+        <span id="ctrlKey" style="display: none;">Ctrl</span>
+        <span id="key">K</span>
+        )
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    // show text "Cmd-K" on Mac, "Ctrl-K" elsewhere
+    var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    if (isMac) {
+        document.getElementById('cmdKey').style.display = 'inline';
+    } else {
+        document.getElementById('ctrlKey').style.display = 'inline';
+    }
+
+    function toggleHotkeyInfo() {
+        var content = document.getElementById('hotkeys-content');
+        if (content.style.maxHeight !== '0px') {
+          // Hide the content
+          content.style.maxHeight = '0px';
+        } else {
+          // Show the content
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
+</script>
+
 
 <script type="importmap">{ "imports": { "three": "//unpkg.com/three/build/three.module.js" }}</script>
 <script type="module" src="graph.js"></script>
+<script type="module"> import {micromark} from 'https://esm.sh/micromark@3?bundle' </script>
 <script type="module">
-    import { highlightAndCenter } from './graph.js';
+    import { showPalette, selectGroup, highlightAndCenter, clearHighlight, setMode, multiplyZoomFactor, highlightGroup } from './graph.js';
     window.highlightAndCenter = highlightAndCenter;
-    console.log("hello");
+    window.clearHighlight = clearHighlight;
+    window.setMode = setMode;
+    window.multiplyZoomFactor = multiplyZoomFactor;
+    window.highlightGroup = highlightGroup;
+    window.selectGroup = selectGroup;
+    window.showPalette = showPalette;
+
+window.addEventListener('keydown', function(event) {
+    switch (event.key) {
+    case '1':
+        setMode('influence');
+        event.stopPropagation();
+        break;
+    case '2':
+        setMode('exposure');
+        event.stopPropagation();
+        break;
+    case '+':
+        multiplyZoomFactor(1.1);
+        event.stopPropagation();
+        break;
+    case '-':
+        multiplyZoomFactor(0.9);
+        event.stopPropagation();
+        break;
+    case 'Tab':
+        highlightGroup();
+        event.stopPropagation();
+        event.preventDefault();
+        break;
+    case 'Escape':
+        clearHighlight();
+        event.stopPropagation();
+        break;
+    }
+});
+
+// toggle key description
+document.getElementById('description').addEventListener('click', function(event) {
+    if (event.target.id === 'toggleButton') {
+        var content = document.getElementById('content');
+        if (content.style.maxHeight !== '0px') {
+          // Hide the content
+          content.style.maxHeight = '0px';
+        } else {
+          // Show the content
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
+});
 </script>
+
 <style>
+body {
+}
+
+#node-description a {
+    color: white; /* Color of links */
+    font-weight: bold; /* Bold font for links */
+    transition: color 0.2s ease; /* Smooth transition for color change */
+}
+
+#node-description a:hover {
+    color: #bbbbff; /* Color of link when hovered */
+    text-decoration: underline; /* Adds underline on hover */
+}
+
 .link {
     color: white; /* Default link color */
     text-decoration: none; /* Removes underline from links */
@@ -34,6 +166,19 @@
 .link:hover {
     color: #bbbbff; /* Color of link when hovered */
     text-decoration: underline; /* Adds underline on hover */
+}
+
+#content {
+    max-height: none;
+    transition: max-height 0.02s ease-out;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
 }
 </style>
 {{ end }}
