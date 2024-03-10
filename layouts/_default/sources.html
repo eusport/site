@@ -6,6 +6,7 @@
     <table class="table table-auto w-full border relative shadow-gradient1">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Назва</th>
           <th>Рік</th>
           <th>Розпорядник</th>
@@ -16,6 +17,7 @@
         {{ range $i, $r := $csv }}
         {{ if gt $i 0 }}
         <tr>
+          <td>{{ index $r 0 }}</td>
           <td>
             <a class="link link-hover" href="{{ index $r 1 }}" target="_blank">
               <strong>{{ index $r 2 }}</strong>
