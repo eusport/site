@@ -8,19 +8,3 @@
   </div>
   {{ end }}
 </div>
-
-<!--
-<div class="hidden md:block lg:block">
-  <h2 class="text-4xl font-bold text-highlight1 my-5">{{ i18n "authors" }}</h2>
-  <div class="flex flex-col">
-    {{ $pages := where .Site.RegularPages "Section" "authors" }}
-    {{ range $pages}}
-    <a
-      class="btn btn-outline btn-primary btn-sm justify-start m-1"
-      href="{{ .RelPermalink }}" rel="noreferrer noopener" class="divide-y">
-      {{ .Params.name }}
-    </a>
-    {{ end }}
-  </div>
-</div>
--->

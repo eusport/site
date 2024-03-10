@@ -92,3 +92,5 @@
     other = "Організацій"
 [stats_persons]
     other = "Людей"
+[sources]
+    other = "Джерела даних"

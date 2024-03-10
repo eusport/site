@@ -96,3 +96,5 @@
     other = "Organizations"
 [stats_persons]
     other = "Persons"
+[sources]
+    other = "Data sources"

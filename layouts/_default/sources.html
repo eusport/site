@@ -1,0 +1,37 @@
+{{ define "main" }} {{ $csv := getCSV "," .Site.Params.sources.url }}
+
+<div class="container mx-auto w-full">
+  {{ partial "home/section-title" (i18n ("sources") ) }}
+  <div class="w-full flex justify-center">
+    <table class="table table-auto w-full border relative shadow-gradient1">
+      <thead>
+        <tr>
+          <th>Назва</th>
+          <th>Рік</th>
+          <th>Розпорядник</th>
+          <th>Додано</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $i, $r := $csv }}
+        {{ if gt $i 0 }}
+        <tr>
+          <td>
+            <a class="link link-hover" href="{{ index $r 1 }}" target="_blank">
+              <strong>{{ index $r 2 }}</strong>
+            </a>
+          </td>
+          <td>{{ index $r 5 }}</td>
+          <td>
+            {{ if eq (index $r 4) "Ukraine" }}🇺🇦 {{ end }}
+            {{ index $r 3 }}
+          </td>
+          <td>{{ index $r 8 }}</td>
+        </tr>
+        {{ end }}
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{ end }}
