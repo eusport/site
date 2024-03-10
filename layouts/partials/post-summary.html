@@ -1,7 +1,7 @@
 <a href="{{ .RelPermalink }}" rel="noreferrer noopener" class="divide-y">
-  <div
-    class="card card-compact shadow-lg hover:shadow-2xl dark:shadow-neutral-50 w-screen lg:max-w-md lg:w-80"
-  >
+<div class="card card-compact shadow-lg hover:shadow-2xl dark:shadow-neutral-50
+            my-4
+  w-full lg:max-w-md lg:w-80">
     {{ $image := .Resources.GetMatch .Params.Image }} {{ with $image }}
     <figure>
       <img alt="image" class="object-cover w-full max-h-40 lg:max-h-40 lg:w-full
@@ -9,13 +9,13 @@
       }}" >
     </figure>
     {{ end }}
-    <div class="card-body h-72 flex flex-col justify-between">
+    <div class="card-body flex flex-col justify-between">
       <div>
         <p class="text-indigo-500 text-md font-medium">
           {{ with .Param "tags" }} {{ $tag := index (. | sort) 0 }} {{ with $tag
           }} {{ partial "tag" . }} {{ end }} {{ end }}
         </p>
-        <h2 class="card-title text-3xl pb-3">{{ .Title }}</h2>
+        <h2 class="card-title text-2xl pb-2">{{ .Title }}</h2>
         <p class="line-clamp-4">{{ .Summary }}</p>
       </div>
       <div class="text-primary">{{ .Date | time.Format ":date_long" }}</div>

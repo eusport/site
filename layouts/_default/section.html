@@ -3,20 +3,18 @@
   {{ partial "home/section-title" (i18n (lower .Title)) }}
 
   <div class="col-span-1 md:hidden lg:hidden flex-col justify-start">
-      {{ partial "sectiontags.html" . }}
+    {{ partial "sectiontags.html" . }}
   </div>
 
   <div class="grid grid-cols-4 gap-5">
     <div class="col-span-3 flex flex-wrap gap-2">
-      {{ range where .Paginator.Pages "Draft" "==" false }}
-      {{ partial "post-summary.html" . }}
-      {{ end }}
+      {{ range where .Paginator.Pages "Draft" "==" false }} {{ partial
+      "post-summary.html" . }} {{ end }}
     </div>
 
     <div class="hidden col-span-1 md:flex lg:flex flex-col justify-start">
       {{ partial "sectiontags.html" . }}
     </div>
   </div>
-
 </div>
 {{ end }}
