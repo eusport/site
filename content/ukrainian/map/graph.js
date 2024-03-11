@@ -1,14 +1,15 @@
-import { UnrealBloomPass } from '//unpkg.com/three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { micromark } from 'https://esm.sh/micromark@3'
+import * as THREE from "three";
+import SpriteText from "three-spritetext";
+import { UnrealBloomPass } from "//unpkg.com/three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { micromark } from "https://esm.sh/micromark@3";
 
-
-import Palette from './palette.js'; // Adjust the path as per your folder structure
+import Palette from "./palette.js"; // Adjust the path as per your folder structure
 
 const data = await d3.json("graph.json");
 
 const gData = {
   nodes: data.nodes,
-  links: data.links
+  links: data.links,
 };
 
 const palette = new Palette(searchNodes());
@@ -19,9 +20,9 @@ export function showPalette() {
 }
 
 // cross-link node objects
-gData.links.forEach(link => {
-  const a = data.nodes.find(node => node.id === link.source);
-  const b = data.nodes.find(node => node.id === link.target);
+gData.links.forEach((link) => {
+  const a = data.nodes.find((node) => node.id === link.source);
+  const b = data.nodes.find((node) => node.id === link.target);
   if (a && b) {
     !a.neighbors && (a.neighbors = []);
     !b.neighbors && (b.neighbors = []);
@@ -37,25 +38,26 @@ gData.links.forEach(link => {
 
 function activeGroups() {
   if (selectedNode) {
-    return new Set([selectedNode, ...selectedNode.neighbors]).map(node => node.group);
+    return new Set([selectedNode, ...selectedNode.neighbors]).map(
+      (node) => node.group,
+    );
   }
 
-  return new Set(gData.nodes.map(node => node.group));
+  return new Set(gData.nodes.map((node) => node.group));
 }
 
 // set different colors
 const groupsColors = {
-  "Інфраструктура": "#00bbff",
-  "Автономія": "#ff8000",
-  "KPI": "#ff0000",
-  "Економіка": "#f0f000",
-  "Тренерство": "#cc55cc",
-  "Управління": "#00ff80",
-  "Клуби": "#00ffff",
-  "Ідеологія": "#0080ff",
+  Інфраструктура: "#00bbff",
+  Автономія: "#ff8000",
+  KPI: "#ff0000",
+  Економіка: "#f0f000",
+  Тренерство: "#cc55cc",
+  Управління: "#00ff80",
+  Клуби: "#00ffff",
+  Ідеологія: "#0080ff",
   "": "#bbb",
-}
-
+};
 
 function groupName(group) {
   if (group == "") return "Невідомо";
@@ -67,17 +69,24 @@ function showGroups() {
 
   // render the ul list with color circle and group name into div with id 'groups'
   const groupsDiv = document.getElementById("groups");
-  groupsDiv.innerHTML = '<ul style="list-style-type: none;">' + [...groups].map((group) => {
-    group = group.trim();
-    console.log("-" + group + "-");
-    const color = groupsColors[group];
-    const groupJs = escapeHtml(group);
-    return `<li style="padding-top: 5px">
+  groupsDiv.innerHTML =
+    '<ul style="list-style-type: none;">' +
+    [...groups]
+      .map((group) => {
+        group = group.trim();
+        console.log("-" + group + "-");
+        const color = groupsColors[group];
+        const groupJs = escapeHtml(group);
+        return `<li style="padding-top: 5px">
       <span onclick="selectGroup('${groupJs}')" style="cursor: pointer">
-      <span class="circle" style="background-color: ${color}"></span>${groupName(group)}
+      <span class="circle" style="background-color: ${color}"></span>${groupName(
+        group,
+      )}
       </span>
       </li>`;
-  }).join('') + '</ul>';
+      })
+      .join("") +
+    "</ul>";
 }
 
 const highlightNodes = new Set();
@@ -85,7 +94,7 @@ const highlightLinks = new Set();
 let selectedNode = null;
 let isolateMode = false;
 
-let sizeMode = 'influence';
+let sizeMode = "influence";
 let zoomFactor = 15; // node zoom factor
 
 showGroups();
@@ -110,52 +119,57 @@ function nodeColor(node) {
   var color = groupsColors[node.group];
   if (selectedNode) {
     if (node === selectedNode) {
-      color = 'yellow';
+      color = "yellow";
       // if node is target neighbor of selected node, set it to red
-    } else if (selectedNode.links.find(link => link.target === node)) {
-      color = 'red';
+    } else if (selectedNode.links.find((link) => link.target === node)) {
+      color = "red";
       // if node is a source neighbor of selected node, set it to green
-    } else if (selectedNode.links.find(link => link.source === node)) {
-      color = 'green';
+    } else if (selectedNode.links.find((link) => link.source === node)) {
+      color = "green";
     } else {
-      color = '#888';
+      color = "#888";
     }
   } else if (highlightNodes.size) {
     if (!highlightNodes.has(node)) {
-      color = '#888';
+      color = "#888";
     }
   }
 
   return color;
 }
 
-const Graph = ForceGraph3D({ controls: "orbit" })
-  (document.getElementById('3d-graph'))
+const Graph = ForceGraph3D({ controls: "orbit" })(
+  document.getElementById("3d-graph"),
+)
   .graphData(gData)
-  .backgroundColor('#000003')
+  .backgroundColor("#000003")
   .linkDirectionalArrowLength(3)
   .linkDirectionalArrowRelPos(1)
   .linkCurvature(0.1)
   // .nodeAutoColorBy('group')
   // .nodeColor(node => nodeColor(node))
-  .nodeLabel('name')
+  .nodeLabel("name")
   .nodeVisibility(isNodeVisible)
   .linkVisibility(isLinkVisible)
-  .onNodeDragEnd(node => {
+  .onNodeDragEnd((node) => {
     node.fx = node.x;
     node.fy = node.y;
     node.fz = node.z;
   })
   // .onNodeHover(centerCamera)
-  .linkDirectionalParticles(link => highlightLinks.has(link) ? 50 : 0)
+  .linkDirectionalParticles((link) => (highlightLinks.has(link) ? 50 : 0))
   .linkDirectionalParticleWidth(1)
   .linkDirectionalParticleSpeed(0.002)
-  .linkDirectionalParticleColor(link => selectedNode && link.source === selectedNode ? 'red' : (selectedNode && highlightNodes.size ? 'green' : 'white'))
+  .linkDirectionalParticleColor((link) =>
+    selectedNode && link.source === selectedNode
+      ? "red"
+      : selectedNode && highlightNodes.size
+        ? "green"
+        : "white",
+  )
   .onNodeClick(clickNode)
-  .nodeThreeObject(renderNode)
-  ;
-
-Graph.d3Force('charge').strength(-100);
+  .nodeThreeObject(renderNode);
+Graph.d3Force("charge").strength(-100);
 
 const bloomPass = new UnrealBloomPass();
 bloomPass.strength = 1;
@@ -165,7 +179,7 @@ Graph.postProcessingComposer().addPass(bloomPass);
 
 function renderNode(node) {
   const group = new THREE.Group(); // Create a group to hold the sphere and the text
-  var size = (sizeMode == 'influence' ? node.val : node.exposure) * zoomFactor;
+  var size = (sizeMode == "influence" ? node.val : node.exposure) * zoomFactor;
   const color = nodeColor(node);
 
   // if (selectedNode) {
@@ -192,7 +206,10 @@ function renderNode(node) {
   // Create the sphere
   const sphereGeometry = new THREE.SphereGeometry(size, 32, 32); // Adjust the size as needed
 
-  const normalMaterial = new THREE.MeshBasicMaterial({ color: color, transparent: true });
+  const normalMaterial = new THREE.MeshBasicMaterial({
+    color: color,
+    transparent: true,
+  });
   const sphere = new THREE.Mesh(sphereGeometry, normalMaterial);
   group.add(sphere); // Add the sphere to the group
 
@@ -219,11 +236,11 @@ function clickNode(node, event) {
   }
 }
 
-const groups = new Set(gData.nodes.map(node => node.group));
+const groups = new Set(gData.nodes.map((node) => node.group));
 const allGroups = Array.from(groups);
 
 export function searchNodes() {
-  var nodes = gData.nodes.map(node => {
+  var nodes = gData.nodes.map((node) => {
     return {
       id: node.id,
       name: node.name,
@@ -236,7 +253,8 @@ export function searchNodes() {
 }
 
 function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;")
+  return str
+    .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
@@ -244,15 +262,15 @@ function escapeHtml(str) {
 }
 
 function escapeForJs(str) {
-  return str.replace(/\\/g, '\\\\')
-    .replace(/"/g, '\\"');
+  return str.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
-
 
 export function highlightGroup(focus = false) {
   selectedNode = null;
   // if there any highlighted nodes, get the name of the group of the first one
-  const group = highlightNodes.size ? highlightNodes.values().next().value.group : null;
+  const group = highlightNodes.size
+    ? highlightNodes.values().next().value.group
+    : null;
   var nextGroup;
   if (group == null) {
     nextGroup = allGroups[0];
@@ -275,7 +293,7 @@ export function highlightGroup(focus = false) {
 
 export function selectGroup(group) {
   highlightNode(null);
-  const nodes = gData.nodes.filter(node => node.group === group);
+  const nodes = gData.nodes.filter((node) => node.group === group);
   highlightOnlyNodes(nodes, focus);
   showDescriptionGroup(group);
   showGroups();
@@ -288,19 +306,19 @@ export function multiplyZoomFactor(factor) {
 
 export function setMode(mode) {
   switch (mode) {
-    case 'influence':
-      sizeMode = 'influence';
+    case "influence":
+      sizeMode = "influence";
       Graph.nodeThreeObject(renderNode);
       break;
-    case 'exposure':
-      sizeMode = 'exposure';
+    case "exposure":
+      sizeMode = "exposure";
       Graph.nodeThreeObject(renderNode);
       break;
   }
 }
 
 export function highlightAndCenter(id) {
-  const node = gData.nodes.find(node => node.id === id);
+  const node = gData.nodes.find((node) => node.id === id);
   highlightNode(node, false);
   centerCamera(node);
 }
@@ -311,7 +329,8 @@ export function clearHighlight() {
 
 function highlightNode(node, focus = false) {
   // no state change
-  if ((!node && !highlightNodes.size) || (node && selectedNode === node)) return;
+  if ((!node && !highlightNodes.size) || (node && selectedNode === node))
+    return;
 
   showDescriptionSelectedNode(node);
 
@@ -322,8 +341,8 @@ function highlightNode(node, focus = false) {
 
   if (node) {
     highlightNodes.add(node);
-    node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
-    node.links.forEach(link => highlightLinks.add(link));
+    node.neighbors.forEach((neighbor) => highlightNodes.add(neighbor));
+    node.links.forEach((link) => highlightLinks.add(link));
   }
   isolateMode = focus;
 
@@ -338,9 +357,9 @@ function highlightOnlyNodes(nodes, focus = false) {
   highlightNodes.clear();
   highlightLinks.clear();
 
-  nodes.forEach(node => {
+  nodes.forEach((node) => {
     highlightNodes.add(node);
-    node.links?.forEach(link => highlightLinks.add(link));
+    node.links?.forEach((link) => highlightLinks.add(link));
   });
   isolateMode = focus;
 
@@ -351,12 +370,10 @@ function highlightOnlyNodes(nodes, focus = false) {
 
 function updateHighlight() {
   // trigger update of highlighted objects in scene
-  Graph
-    .nodeColor(Graph.nodeColor())
+  Graph.nodeColor(Graph.nodeColor())
     .nodeOpacity(Graph.nodeOpacity())
     .linkWidth(Graph.linkWidth())
     .linkDirectionalParticles(Graph.linkDirectionalParticles());
-
 }
 
 function centerCamera(node) {
@@ -364,14 +381,15 @@ function centerCamera(node) {
   const distance = 100;
   const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
 
-  const newPos = node.x || node.y || node.z
-    ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
-    : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
+  const newPos =
+    node.x || node.y || node.z
+      ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
+      : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
 
   Graph.cameraPosition(
     newPos, // new position
     node, // lookAt ({ x, y, z })
-    3000  // ms transition duration
+    3000, // ms transition duration
   );
 }
 
@@ -382,7 +400,7 @@ function measureTextWidth(text, fontSize = 10) {
 
 function wrapText(text, maxLineWidth) {
   let lines = [];
-  let words = text.split(' ');
+  let words = text.split(" ");
   let currentLine = words[0];
 
   for (let i = 1; i < words.length; i++) {
@@ -397,7 +415,7 @@ function wrapText(text, maxLineWidth) {
   }
   lines.push(currentLine);
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 // shows description for highlighted node
@@ -429,17 +447,21 @@ function showDescriptionSelectedNode(node) {
     </a>
     </div>
     `;
-  const nodeTitle = node ? escapeHtml(node.name) : '';
-  const text = '<div style="width: 100%; display: flex;  justify-content: space-between;"><span>' + nodeTitle + '</span><span style="white-space: nowrap;"><a id="toggleButton" style="font-size: 18px; cursor: pointer; margin-left: 10px;">▼</a> <a class="close" style="margin-left: 5px; cursor: pointer;" onClick="clearHighlight()">✖</a><span></div>' + formLink;
+  const nodeTitle = node ? escapeHtml(node.name) : "";
+  const text =
+    '<div style="width: 100%; display: flex;  justify-content: space-between;"><span>' +
+    nodeTitle +
+    '</span><span style="white-space: nowrap;"><a id="toggleButton" style="font-size: 18px; cursor: pointer; margin-left: 10px;">▼</a> <a class="close" style="margin-left: 5px; cursor: pointer;" onClick="clearHighlight()">✖</a><span></div>' +
+    formLink;
   titleDiv.style.display = "block";
   titleDiv.innerHTML = node ? text : "";
 
   // find nodes that are sources of links to this node
-  const sources = gData.links.filter(link => link.target === node);
+  const sources = gData.links.filter((link) => link.target === node);
   var causes = "";
   if (sources.length) {
     causes += "🟢 Причини:<br><ul>";
-    sources.forEach(source => {
+    sources.forEach((source) => {
       let nodeId = escapeForJs(source.source.id);
       let nodeName = escapeHtml(source.source.name);
       causes += `<li><a class='link' style='cursor: pointer' onClick='highlightAndCenter("${nodeId}")'>${nodeName}</a></li>`;
@@ -450,11 +472,11 @@ function showDescriptionSelectedNode(node) {
   causesDiv.innerHTML = causes;
 
   // find nodes that are targets of links from this node
-  const targets = gData.links.filter(link => link.source === node);
+  const targets = gData.links.filter((link) => link.source === node);
   var effects = "";
   if (targets.length) {
     effects += "🔴 Наслідки:<br><ul>";
-    targets.forEach(target => {
+    targets.forEach((target) => {
       let nodeId = escapeForJs(target.target.id);
       let nodeName = escapeHtml(target.target.name);
       effects += `<li><a class='link' style='cursor: pointer' onClick='highlightAndCenter("${nodeId}")'>${nodeName}</a></li>`;
@@ -463,12 +485,12 @@ function showDescriptionSelectedNode(node) {
   }
   effectsDiv.innerHTML = effects;
 
-  if (node.description && node.description != '') {
+  if (node.description && node.description != "") {
     const md = micromark(node.description);
     var desc = "🔵 Опис:<br>" + md;
     descriptionDiv.innerHTML = desc;
   } else {
-    descriptionDiv.innerHTML = '';
+    descriptionDiv.innerHTML = "";
   }
 }
 
@@ -476,15 +498,17 @@ function showDescriptionGroup(group) {
   const descDiv = document.getElementById("description");
   descDiv.style.display = "block";
   const titleDiv = document.getElementById("title");
-  const text = groupName(group) + '<span style="white-space: nowrap;"><a id="toggleButton" style="font-size: 18px; cursor: pointer; margin-left: 10px;">▼</a> <a class="close" style="margin-left: 5px; cursor: pointer;" onClick="clearHighlight()">✖</a><span>';
+  const text =
+    groupName(group) +
+    '<span style="white-space: nowrap;"><a id="toggleButton" style="font-size: 18px; cursor: pointer; margin-left: 10px;">▼</a> <a class="close" style="margin-left: 5px; cursor: pointer;" onClick="clearHighlight()">✖</a><span>';
   titleDiv.innerHTML = text;
 
   // find nodes that are sources of links to this node
-  const nodes = gData.nodes.filter(node => node.group === group);
+  const nodes = gData.nodes.filter((node) => node.group === group);
   var causes = "";
   if (nodes.length) {
     causes += "🟢 Проблеми:<br><ul>";
-    nodes.forEach(node => {
+    nodes.forEach((node) => {
       let nodeId = escapeForJs(node.id);
       let nodeName = escapeHtml(node.name);
       causes += `<li><a class='link' style='cursor: pointer' onClick='highlightAndCenter("${nodeId}")'>${nodeName}</a></li>`;
